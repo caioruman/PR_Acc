@@ -177,8 +177,7 @@ def main():
           )  
 
   plt.tight_layout()
-  plt.savefig('domain_globe.png')
-  plt.show()
+  plt.savefig('domain_globe.png')  
   plt.close()
 
 
