@@ -65,7 +65,7 @@ def main():
                             add_colorbar=True, norm=normDomain, cmap=cut_terrain_map, vmin=-10, vmax=3400, extend='max')
   plt.title('Topography: CONUS domain')
 
-  plt.savefig('topo_domain.png', dpi=150)
+  plt.savefig('topo_domain.png', dpi=150, pad_inches=0.0, bbox_inches='tight')
   plt.close()
     
   # Topography for the area of interest (NB)
@@ -85,7 +85,7 @@ def main():
   tp.LANDMASK[0].where(tp.LANDMASK[0] == 0, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',
                                                                 add_colorbar=False, cmap=sea_map)
   plt.title('Topography: New Brunswick')
-  plt.savefig('topo_newbrunswick.png', dpi=150)
+  plt.savefig('topo_newbrunswick.png', dpi=150, pad_inches=0.0, bbox_inches='tight')
 
 
 
