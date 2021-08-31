@@ -80,7 +80,7 @@ def main():
   ax.stock_img()
   
   tp.HGT[0].where(tp.LANDMASK[0] == 1, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',                          
-                            add_colorbar=True, norm=norm1, levels=levels, cmap=terrain_map, vmin=0, vmax=1000, extend='max')
+                            add_colorbar=True, norm=normNB, levels=levels, cmap=terrain_map, vmin=0, vmax=1000, extend='max')
   tp.LANDMASK[0].where(tp.LANDMASK[0] == 0, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',
                                                                 add_colorbar=False, cmap=sea_map)
   plt.title('Topography: New Brunswick')
