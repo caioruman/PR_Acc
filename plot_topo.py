@@ -105,20 +105,21 @@ def main():
 
   bn = BoundaryNorm(levels, ncolors=len(levels) - 1)
 
-  ax.coastlines(resolution='50m', linewidth=width)
-  ax.add_feature(cfeature.BORDERS.with_scale("50m"), linewidth=width)
-  ax.add_feature(cfeature.STATES.with_scale("50m"), linewidth=width/2)
+  ax.coastlines(resolution='10m', linewidth=width)
+  ax.add_feature(cfeature.BORDERS.with_scale("10m"), linewidth=width)
+  ax.add_feature(cfeature.STATES.with_scale("10m"), linewidth=width/2)
   ax.stock_img()
   
   tp.HGT[0].where(tp.LANDMASK[0] == 1, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',                          
                             add_colorbar=True, norm=bn, levels=levels, cmap=terrain_map, vmin=0, vmax=1000, extend='max')
-  tp.LANDMASK[0].where(tp.LANDMASK[0] == 0, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',
-                                                                add_colorbar=False, cmap=sea_map)
+  #tp.LANDMASK[0].where(tp.LANDMASK[0] == 0, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',
+  #                                                               add_colorbar=False, cmap=sea_map)
+  ax.add_feature(cfeature.OCEAN, zorder=10)                                                                
   plt.title('Topography: New Brunswick')
   plt.savefig('topo_newbrunswick_v2.png', dpi=150, pad_inches=0.0, bbox_inches='tight')
 
   plt.close()
-  
+
   # Domain on the Globe
 
   plt.figure(figsize=(14,10))
