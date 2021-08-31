@@ -73,20 +73,25 @@ def main():
   plt.figure(figsize=(14,10))
   ax = plt.axes(projection=myLambert)
 
+  from matplotlib.colors import BoundaryNorm  
+
   ax.set_extent([-69.5, -63.5, 45, 48.2])
   width = 1.0
   levels=[0,100,200,300,400,500,600,700,800,900,1000]
+
+  bn = BoundaryNorm(levels, ncolors=len(levels) - 1)
+
   ax.coastlines(resolution='50m', linewidth=width)
   ax.add_feature(cfeature.BORDERS.with_scale("50m"), linewidth=width)
   ax.add_feature(cfeature.STATES.with_scale("50m"), linewidth=width/2)
   ax.stock_img()
   
   tp.HGT[0].where(tp.LANDMASK[0] == 1, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',                          
-                            add_colorbar=True, norm=normNB, levels=levels, cmap=terrain_map, vmin=0, vmax=1000, extend='max')
+                            add_colorbar=True, norm=bn, levels=levels, cmap=terrain_map, vmin=0, vmax=1000, extend='max')
   tp.LANDMASK[0].where(tp.LANDMASK[0] == 0, np.nan).plot.contourf(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT',
                                                                 add_colorbar=False, cmap=sea_map)
   plt.title('Topography: New Brunswick')
-  plt.savefig('topo_newbrunswick.png', dpi=150, pad_inches=0.0, bbox_inches='tight')
+  plt.savefig('topo_newbrunswick_v2.png', dpi=150, pad_inches=0.0, bbox_inches='tight')
 
 
 
