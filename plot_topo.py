@@ -52,16 +52,17 @@ def main():
 
   # Plotting the topography of the entire domain 
   plt.figure(figsize=(14,10))
-  ax = plt.axes(projection=myLambert)  
-  ax.set_extent([-122.9, -73.12, 19.1, 52.42])
+  ax = plt.axes(projection=myLambert)
+  #ax.set_extent([-119.90, -73.50, 23.08, 50.00])
+  ax.set_extent([-122.9, -72.68, 19.1, 56.19])
   #ax.set_extent([-132.9, -63.12, 15.1, 57.42])
   width = 1.0
   ax.coastlines(resolution='50m', linewidth=width)
   ax.add_feature(cfeature.BORDERS.with_scale("50m"), linewidth=width)
   ax.add_feature(cfeature.STATES.with_scale("50m"), linewidth=width/2)
   ax.stock_img()
-  tp.HGT[0].plot.pcolormesh(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT', 
-                            add_colorbar=True, norm=normDomain, cmap=cut_terrain_map)
+  tp.HGT[0].where(tp.LANDMASK[0] == 1, 0).plot.pcolormesh(ax=ax, transform=ccrs.PlateCarree(), x='XLONG', y='XLAT', 
+                            add_colorbar=True, norm=normDomain, cmap=cut_terrain_map, vmin=-10, vmax=3400, extend='max')
   plt.title('Topography: CONUS domain')
 
   plt.savefig('topo_domain.png', dpi=150)
