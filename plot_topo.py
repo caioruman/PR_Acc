@@ -22,7 +22,7 @@ class FixPointNormalize(matplotlib.colors.Normalize):
     self.col_val = col_val
     matplotlib.colors.Normalize.__init__(self, vmin, vmax, clip)
 
-def __call__(self, value, clip=None):
+  def __call__(self, value, clip=None):
     x, y = [self.vmin, self.sealevel, self.vmax], [0, self.col_val, 1]
     return np.ma.masked_array(np.interp(value, x, y))
 
@@ -34,6 +34,7 @@ def main():
   # combine them and build a new colormap
   colors = np.vstack((colors_undersea, colors_land))
   cut_terrain_map = matplotlib.colors.LinearSegmentedColormap.from_list('cut_terrain', colors)
+  
   terrain_map = matplotlib.colors.LinearSegmentedColormap.from_list('cut_terrain', colors_land)
   sea_map = matplotlib.colors.LinearSegmentedColormap.from_list('cut_terrain', colors_undersea)
 
