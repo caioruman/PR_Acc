@@ -8,6 +8,8 @@ import matplotlib.colors
 
 class FixPointNormalize(matplotlib.colors.Normalize):
   """ 
+  From https://stackoverflow.com/questions/40895021/python-equivalent-for-matlabs-demcmap-elevation-appropriate-colormap
+  
   Inspired by https://stackoverflow.com/questions/20144529/shifted-colorbar-matplotlib
   Subclassing Normalize to obtain a colormap with a fixpoint 
   somewhere in the middle of the colormap.
@@ -149,11 +151,14 @@ def main():
 
   # NB Area of Interest
   lat = 45
-  lon = -70.5
+  lon = -72.5
   i1, j1 = geo_idx([lat, lon], np.array([tp.XLAT[0], tp.XLONG[0]]))
   lat = 48.2
   lon = -61.5
   i2, j2 = geo_idx([lat, lon], np.array([tp.XLAT[0], tp.XLONG[0]]))
+
+  print(i1, j1)
+  print(i2, j2)
 
   ii = [i1, j1]
 
